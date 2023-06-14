@@ -37,8 +37,29 @@ const startTypingTest=()=>{
 //step4
 
 const endTypingTest=()=>{
+    btn.innerHTML="start";
     let endDate=new Date();
     endTime=endDate.getTime();
-    totalTimeTaken=endTime-startTime;
+    totalTimeTaken=(endTime-startTime)/1000;
+    calculateTypingSpeed(totalTimeTaken);
+    show_sentence.innerHTML="";
+    typing_ground.value="";
+    // console.log(totalTimeTaken);
+
+}
+
+//step 5
+
+const calculateTypingSpeed=(time_taken)=>{
+    let totalWords= typing_ground.value.trim();
+    let actualWords= totalWords===''? 0 : totalWords.split(" ").length;
+
+    if(actualWords!==0){
+        let typingSpeed=(actualWords/time_taken)*60;
+        typingSpeed=Math.round(typingSpeed);
+        score.innerHTML = `Your typing speed is ${typingSpeed} words per minutes & you wrote ${actualWords} words & time taken ${time_taken} sec`;
+    }else{
+        score.innerHTML = `Your typing speed is 0 words per minutes & time taken ${time_taken} sec`;
+    }
 
 }
